@@ -3,8 +3,24 @@
 Infrastructure as Code (Terraform or [OpenTofu](https://opentofu.org/)) to install the Booulder Biocomputing Lambda. This repository is a module to be included downstream.
 
 
+## Example Usage
 
+Sample usage of using this module.
 
+```tf
+module "lambda" {
+  source = "./modules/lambda"
+
+  project_prefix  = "proj01" 
+  bucket_name     = "my-bucket-aws-s3" 
+  secret_arn      = data.aws_secretsmanager_secret.bbc_config.arn
+  secret_name     = "secret-bbc-name" 
+  lambda_zip_path = "/my/path/excel_lambda.zip" 
+  lambda_runtime  = "python3.14" 
+  lambda_handler  = "lambda_function.lambda_handler" 
+  tags            = var.tags
+}
+```
 
 
 <!-- BEGIN_TF_DOCS -->
